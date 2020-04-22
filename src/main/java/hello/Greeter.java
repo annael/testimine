@@ -6,6 +6,7 @@ public class Greeter {
 
 	public String sayHello(String name) {
 		int length;
+
 		try {
 			length = counter.count(name);
 		} catch (Exception x) {

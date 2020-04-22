@@ -13,7 +13,7 @@ import static org.mockito.Mockito.when;
 public class GreeterTest {
 
 	@Mock
-	private Counter counter;
+	private Counter counter = new Counter();
 
 	@InjectMocks
 	private Greeter greeter = new Greeter();
