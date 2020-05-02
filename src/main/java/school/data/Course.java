@@ -5,6 +5,7 @@ import school.services.PublicHolidayService;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 public class Course {
 
@@ -46,22 +47,30 @@ public class Course {
             final int startW = startDate.getDayOfWeek().getValue();
             final int endW = endDate.getDayOfWeek().getValue();
 
-            final long days = ChronoUnit.DAYS.between(startDate, endDate) + 1;
-            long result = days - 2*(days/7); //remove weekends
+            try {
+                //List<ZonedDateTime> holidays = publicHolidayService.getPublicHolidays(String.valueOf(startDate.getYear()));
 
-            if (days % 7 != 0) { //deal with the rest days
-                if (startW == 7) {
-                    result -= 1;
-                } else if (endW == 7) {  //they can't both be Sunday, otherwise rest would be zero
-                    result -= 1;
-                } else if (endW < startW) { //another weekend is included
-                    result -= 2;
+
+                final long days = ChronoUnit.DAYS.between(startDate, endDate) + 1;
+                long result = days - 2*(days/7); //remove weekends
+
+                if (days % 7 != 0) { //deal with the rest days
+                    if (startW == 7) {
+                        result -= 1;
+                    } else if (endW == 7) {  //they can't both be Sunday, otherwise rest would be zero
+                        result -= 1;
+                    } else if (endW < startW) { //another weekend is included
+                        result -= 2;
+                    }
                 }
+
+
+                return result;
+
+            } catch (Exception ex) {
+                throw new IllegalArgumentException("bad data");
             }
 
-            publicHolidayService.getPublicHolidays("2019");
-
-            return result;
         } else {
             throw new IllegalArgumentException("wtf");
         }

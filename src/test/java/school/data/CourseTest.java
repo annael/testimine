@@ -12,14 +12,14 @@ public class CourseTest {
     public void gets_length() {
         //given
         ZonedDateTime startDate = ZonedDateTime.parse("2020-01-01T00:00:00.000+00:00[UTC]");
-        ZonedDateTime endDate = ZonedDateTime.parse("2020-01-07T00:00:00.000+00:00[UTC]");
+        ZonedDateTime endDate = ZonedDateTime.parse("2021-01-01T00:00:00.000+00:00[UTC]");
         Course course = new Course(startDate, endDate);
 
         //when
         long result = course.getWorkingDays();
 
         //then
-        assertEquals(5L, result);
+        assertEquals(263L, result);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -33,5 +33,18 @@ public class CourseTest {
         course.getWorkingDays();
     }
 
+    @Test
+    public void gets_working_days() {
+        //given
+        ZonedDateTime startDate = ZonedDateTime.parse("2020-01-01T00:00:00.000+00:00[UTC]");
+        ZonedDateTime endDate = ZonedDateTime.parse("2021-02-01T00:00:00.000+00:00[UTC]");
+        Course course = new Course(startDate, endDate);
+
+        //when
+        long result = course.getWorkingDays();
+
+        //then
+        assertEquals(284, result);
+    }
 
 }

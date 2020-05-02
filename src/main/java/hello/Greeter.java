@@ -15,7 +15,7 @@ public class Greeter {
 
 		if (length == 1) {
 			return "Wow that's a short name, " + name + ", welcome!";
-		} else if (length >0 && length < 20) {
+		} else if (length > 1 && length < 20) {
 			return String.format("Hello, %s, welcome! Your name is %d long", name, length);
 		} else {
 			return "Who are you :o";
